@@ -1,0 +1,31 @@
+//criação do projeto 
+
+dotnet new sln --name EtecShop
+
+
+//criar projeto web apiVersion
+
+dotnet new webapi -o EtecShopAPI --use-controllers
+
+
+// para adicionar a api a solucao criada
+
+dotnet sln add EtecShopAPI\EtecShopAPI.csproj
+
+
+//instalar o driver de conexao do mongo 
+
+
+cd EtecShopAPI
+
+//instalar o pacote 
+
+dotnet add package MongoDB.Driver
+
+
+
+
+"MongoDBSettings": {
+    "ConnectionString": "mongodb+srv://admin:<1234>@cluster0.hkcyo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "DatabaseName": "EtecShops"
+  },
