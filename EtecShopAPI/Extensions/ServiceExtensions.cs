@@ -1,4 +1,5 @@
 using EtecShopAPI.Models;
+using EtecShopAPI.Repositories;
 using MongoDB.Driver;
 
 namespace EtecShopAPI.Extensions;
@@ -29,5 +30,10 @@ public static class ServiceExtensions
             var client = new MongoClient(settings.ConnectionString);
             return client.GetDatabase(settings.DatabaseName);    
         });
+    }
+
+    public static void ConfigureRepositories(this IServiceCollection services) 
+    {
+        services.AddSingleton<IProdutoRepository, ProdutoRepository>();
     }
 }

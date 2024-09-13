@@ -9,22 +9,13 @@ public class ProdutoRepository : IProdutoRepository
     {
         _collection = mongoDatabase.GetCollection<Produto>("produtos");
     }
-    public Task CreateAsync(Produto produto)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task CreateAsync(Produto produto) => await _collection.InsertOneAsync(produto);
 
-    public Task DeleteAsync(string id)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task DeleteAsync(string id) => await _collection.DeleteOneAsync(p => p.Id == id);
 
-    public async Task<List<Produto>> GetAllAsync() => await _collection.Find(_ => true).ToListAsync();
+    public async Task<List<Produto>> GetAllAsync() => await _collection.Find(p => true).ToListAsync();
 
-    public async Task<Produto> GetByIdAsync(string id) => await _collection.Find(_ => _.Id == id).FirstOrDefaultAsync();
+    public async Task<Produto> GetByIdAsync(string id) => await _collection.Find(p => p.Id == id).FirstOrDefaultAsync();
 
-    public Task UpdateAsync(Produto produto)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task UpdateAsync(Produto produto) => await _collection.ReplaceOneAsync(p => p.Id == produto.Id, produto);
 }
